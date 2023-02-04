@@ -13,5 +13,8 @@ class College extends Model
     {
         return $this->hasMany(Facultie::class);
     }
-
+    public function departments()
+    {
+        return $this->hasManyThrough(Department::class, Facultie::class, 'college_id', 'facultie_id',);
+    }
 }

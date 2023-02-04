@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Facultie extends Model
+class Document extends Model
 {
     use HasFactory;
-    protected $guarded = [];
-    public function departements()
+    protected $fillable = ['name', 'type'];
+    public function user()
     {
-        return $this->hasMany(Department::class);
+        return $this->belongsTo(User::class);
     }
 }
