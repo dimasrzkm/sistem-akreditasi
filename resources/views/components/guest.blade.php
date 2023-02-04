@@ -22,7 +22,6 @@
 </head>
 
 <body class="bg-body-secondary">
-    <x-navbar />
 
     {{ $slot }}
 
