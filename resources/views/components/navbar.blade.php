@@ -16,9 +16,11 @@
                     <a class="nav-link active" aria-current="page" href={{ route('dashboard') }}>Dashboard</a>
                 </li>
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
+                    @if (Auth()->user()->role == 'reviewer')
+                        <li class="nav-item">
+                            <a class="nav-link" href="users">Users</a>
+                        </li>
+                    @endif
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
