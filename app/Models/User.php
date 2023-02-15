@@ -23,7 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'email_verified_at',
-        'role',
+        'role_id',
 
     ];
 
@@ -46,8 +46,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
     public function documents()
     {
         return $this->hasMany(Document::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
     }
 }

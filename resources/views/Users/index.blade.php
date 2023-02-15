@@ -1,7 +1,21 @@
+@push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <style>
+        .table-responsive .dropdown,
+        .table-responsive .btn-group,
+        .table-responsive .btn-group-vertical {
+            position: static;
+        }
+    </style>
+@endpush
 <x-app>
     <x-container>
         <h2>Users</h2>
-        <div class="table-responsive" style="overflow-y: visible !important">
+        @can('create', \App\Models\User::class)
+            <a class="btn btn-primary" href={{ route('reviewer.users.create') }} role="button">Add</a>
+        @endcan
+        <div class="table-responsive">
             <table class="table bg-white p-4 table-striped">
                 <thead>
                     <tr>
@@ -14,41 +28,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($users as $key=>$value)
+                    @forelse ($users as $key=>$user)
                         <tr>
                             <th scope="row">{{ $key += 1 }}</th>
-                            <td>{{ $value->name }}</td>
-                            <td>{{ $value->username }}</td>
-                            <td>{{ $value->email }}</td>
-                            <td>{{ $value->role }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ $user->username }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->role->name }}</td>
                             <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-danger">Action</button>
-                                    <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                                <div class="btn-group dropup">
+                                    <button type="button" class="btn dropdown-toggle-split hidden-arrow"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                        <i class="bi bi-three-dots-vertical"></i>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        {{-- <li><a class="dropdown-item" href="#">Action</a></li> --}}
+                                        <li><a class="dropdown-item"
+                                                href={{ route('reviewer.users.edit', $user) }}>Edit</a></li>
                                         <li>
-                                            <hr class="dropdown-divider">
+                                            <form action={{ route('reviewer.users.destroy', $user) }} method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" class="dropdown-item"
+                                                    onclick="return confirm('Are you sure?')">Delete</button>
+                                            </form>
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Separated link</a></li>
                                     </ul>
                                 </div>
-                                {{-- <a href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" style="width: 15px; height: 15px;">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </a> --}}
-                                {{-- <a href="">Edit</a>
-                                <a href="">Delete</a> --}}
                             </td>
                         </tr>
                     @empty

@@ -16,9 +16,9 @@
                     <a class="nav-link active" aria-current="page" href={{ route('dashboard') }}>Dashboard</a>
                 </li>
                 @auth
-                    @if (Auth()->user()->role == 'reviewer')
+                    @if (Auth()->user()->role_id == 1)
                         <li class="nav-item">
-                            <a class="nav-link" href="users">Users</a>
+                            <a class="nav-link" href={{ route('reviewer.users.index') }}>Users</a>
                         </li>
                     @endif
                     <li class="nav-item dropdown">
