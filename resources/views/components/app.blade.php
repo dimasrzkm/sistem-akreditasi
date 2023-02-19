@@ -24,6 +24,7 @@
 <body class="bg-body-secondary">
     <x-navbar />
 
+    @include('sweetalert::alert')
     {{ $slot }}
 
     @stack('scripts')

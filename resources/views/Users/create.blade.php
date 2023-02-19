@@ -34,15 +34,6 @@
                             </div>
                         @enderror
                     </div>
-                    {{-- <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
-                        @error('password')
-                            <div class="form-text text-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div> --}}
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
                         <select class="form-select" aria-label="Role user" name="role_id" id="role">

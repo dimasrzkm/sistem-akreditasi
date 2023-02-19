@@ -40,7 +40,7 @@ class UserController extends Controller
         $attributes['role_id'] = (int) $request->role_id;
 
         User::create($attributes);
-        return to_route('reviewer.users.index');
+        return to_route('reviewer.users.index')->with('toast_success', 'data berhasil di simpan');
     }
 
     public function edit(User $user)
@@ -57,13 +57,13 @@ class UserController extends Controller
     {
         $this->authorize('update', $user);
         $user->update(['role_id' => $request->role_id]);
-        return to_route('reviewer.users.index');
+        return to_route('reviewer.users.index')->with('toast_success', 'data berhasil diubah');
     }
 
     public function destroy(User $user)
     {
         $this->authorize('delete', $user);
         $user->delete();
-        return to_route('reviewer.users.index');
+        return to_route('reviewer.users.index')->with('toast_success', 'data berhasil dihapus');;
     }
 }
