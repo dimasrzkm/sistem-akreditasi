@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Department::class);
     }
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'assignments')->withPivot('college', 'assignment_by', 'id');
+    }
 }

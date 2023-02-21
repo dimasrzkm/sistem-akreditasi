@@ -9,12 +9,22 @@ class Department extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function faculty()
+    protected $dates = [
+        'apply_at',
+        'assignment_at',
+    ];
+    public function facultie()
     {
         return $this->belongsTo(Facultie::class);
     }
+    
     public function user()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'assignments');
     }
 }

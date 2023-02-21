@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('facultie_id')->constrained();
-            $table->string('name');
-            $table->dateTime('apply_at')->nullable();
-            $table->dateTime('assignment_at')->nullable();
-            $table->timestamps();
+            $table->foreignId('department_id')->constrained('departments', 'id');
+            $table->foreignId('user_id')->constrained('users', 'id');
+            $table->string('college', 249);
+            $table->string('assignment_by', 249);
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('department_user');
     }
 };

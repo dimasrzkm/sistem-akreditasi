@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -24,6 +25,17 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
         Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
         Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
+    Route::group([
+        'prefix' => 'lpppm',
+        'as' => 'lpppm.'
+    ], function() {
+        Route::get('assignments', [AssignmentController::class, 'index'])->name('assignment.index');
+        Route::get('assignments/create', [AssignmentController::class, 'create'])->name('assignment.create');
+        Route::post('assignments', [AssignmentController::class, 'store'])->name('assignment.store');
+        Route::get('assignments/{user}/edit/{id}', [AssignmentController::class, 'edit'])->name('assignment.edit');
+        Route::put('assignments/{user}', [AssignmentController::class, 'update'])->name('assignment.update');
+        Route::delete('assignments/{user}/{id}', [AssignmentController::class, 'destroy'])->name('assignment.destroy');
     });
     Route::get('dashboard', DashboardController::class)->name('dashboard');
     Route::post('logout', [LoginController::class, 'destroy'])->name('logout');

@@ -16,11 +16,14 @@
                     <a class="nav-link active" aria-current="page" href={{ route('dashboard') }}>Dashboard</a>
                 </li>
                 @auth
-                    @if (Auth()->user()->role_id == 1)
+                    @can('create', \App\Models\User::class)
                         <li class="nav-item">
                             <a class="nav-link" href={{ route('reviewer.users.index') }}>Users</a>
                         </li>
-                    @endif
+                    @endcan
+                    <li class="nav-item">
+                        <a class="nav-link" href={{ route('lpppm.assignment.index') }}>Assignment</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">

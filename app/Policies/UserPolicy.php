@@ -91,4 +91,9 @@ class UserPolicy
     {
         //
     }
+
+    public function assignment(User $user)
+    {
+        return $user->role_id == Role::IS_LPPPM;
+    }
 }
