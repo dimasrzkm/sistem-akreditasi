@@ -39,6 +39,10 @@ class UserController extends Controller
         $attributes['password'] = bcrypt($request->username);
         $attributes['role_id'] = (int) $request->role_id;
 
+        if($request->department_id && $request->department_id != 'Choose Departments') {
+            $attributes['department_id'] = $request->department_id;
+        }
+
         User::create($attributes);
         return to_route('reviewer.users.index')->with('toast_success', 'data berhasil di simpan');
     }

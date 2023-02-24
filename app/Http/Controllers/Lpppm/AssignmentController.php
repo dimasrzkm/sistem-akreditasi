@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Lpppm;
 
+use App\Http\Controllers\Controller;
 use App\Models\College;
 use App\Models\Department;
 use App\Models\User;

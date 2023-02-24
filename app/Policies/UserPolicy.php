@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class UserPolicy
 {
@@ -96,4 +97,20 @@ class UserPolicy
     {
         return $user->role_id == Role::IS_LPPPM;
     }
+
+    public function evaluation(User $user)
+    {
+        return $user->role_id == Role::IS_DEPARTEMENT_HEAD;
+    }
+    
+    public function downloadFileEvaluation(User $user)
+    {
+        return in_array($user->role_id, [Role::IS_DEPARTEMENT_HEAD, Role::IS_REVIEWER]);
+    }
+
+    public function review(User $user)
+    {
+        return $user->role_id == Role::IS_REVIEWER && (auth()->check() && !$user->departments->where('pivot.user_id', auth()->user()->id)->isEmpty());
+    }
+
 }

@@ -40,7 +40,14 @@ class CollegeFacultieDepartment extends Component
 
     public function updatedSelecteFacultie($facultie)
     {
-        if(!is_null($facultie) && !is_null($this->typeDropdowns)) {
+        if(!is_null($facultie) && $this->typeDropdowns == 'create_user') {
+            $this->departments = Department::query()
+                                ->where('facultie_id', $facultie)
+                                ->get()
+                                ->filter(function($item) {
+                                    return $item->user == null;
+                                });
+        } else if(!is_null($facultie) && !is_null($this->typeDropdowns)) {
             $this->departments = Department::query()
                                 ->whereNull('assignment_at')
                                 ->where('facultie_id', $facultie)

@@ -34,20 +34,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <label for="role" class="form-label">Role</label>
-                        <select class="form-select" aria-label="Role user" name="role_id" id="role">
-                            <option selected>Role User</option>
-                            @foreach ($roles as $role)
-                                <option value={{ $role->id }}>{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('role_id')
-                            <div class="form-text text-danger">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                    @livewire('department-head-dropdown')
                     <div class="flex">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

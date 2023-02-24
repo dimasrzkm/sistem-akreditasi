@@ -1,7 +1,8 @@
 <div>
     <div class="mb-3">
         <label for="colleges" class="form-label">Colleges</label>
-        <select wire:model="selectedCollege" class="form-select" aria-label="Colleges" name="college_id" id="colleges">
+        <select wire:model.debounce.500ms="selectedCollege" class="form-select" aria-label="Colleges"
+            @if ($typeDropdowns == 'assignments') name="college_id" @endif id="colleges">
             <option selected>Choose Colleges</option>
             @foreach ($colleges as $collage)
                 <option value={{ $collage->id }}>{{ $collage->name }}</option>
@@ -12,7 +13,8 @@
     @if (!is_null($selectedCollege))
         <div class="mb-3">
             <label for="faculties" class="form-label">Faculties</label>
-            <select wire:model="selecteFacultie" class="form-select" aria-label="Faculties" id="faculties">
+            <select wire:model.debounce.500ms="selecteFacultie" class="form-select" aria-label="Faculties"
+                id="faculties">
                 <option selected>Choose Faculties</option>
                 @foreach ($faculties as $facultie)
                     <option value={{ $facultie->id }}>{{ $facultie->name }}</option>

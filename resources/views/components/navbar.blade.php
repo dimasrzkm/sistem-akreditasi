@@ -16,14 +16,19 @@
                     <a class="nav-link active" aria-current="page" href={{ route('dashboard') }}>Dashboard</a>
                 </li>
                 @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href={{ route('lpppm.assignment.index') }}>Assignment</a>
+                    </li>
                     @can('create', \App\Models\User::class)
                         <li class="nav-item">
                             <a class="nav-link" href={{ route('reviewer.users.index') }}>Users</a>
                         </li>
                     @endcan
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ route('lpppm.assignment.index') }}>Assignment</a>
-                    </li>
+                    @can('evaluation', \App\Models\User::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href={{ route('prodi.evaluation.index') }}>Evaluation</a>
+                        </li>
+                    @endcan
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">

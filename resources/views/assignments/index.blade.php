@@ -25,6 +25,9 @@
                         @can('assignment', \App\Models\User::class)
                             <th scope="col">Act</th>
                         @endcan
+                        @can('review', \App\Models\User::class)
+                            <th scope="col">Act</th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +65,12 @@
                                         </div>
                                     </td>
                                 @endcan
-
+                                @can('review', \App\Models\User::class)
+                                    <td>
+                                        <a class="btn btn-sm btn-primary" href={{ route('lpppm.assignment.create') }}
+                                            role="button">Review</a>
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                     @empty
